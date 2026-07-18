@@ -9,11 +9,15 @@ namespace ArrayStats {
 
 
     
-    //%block="Create Stat $stats for $name list"
+    //%block="Create Stat $stats with name $name2 for $name list"
     //%stats.shadow="lists_create_with"
     //%group="Create"
-    export function create_stats(name: string, stats: any[]): void {
-        StatsArray.push(["" + name + "|" + stats[0] + "|" + stats[1] + "|" + stats[2]])
+    export function create_stats(name: string, stats: any[], name2: string): void {
+        let Statsitems = ""
+        for (let i = 0; i < stats.length; i++) {
+            Statsitems = Statsitems + stats[i] + "|"         
+        }
+        StatsArray.push(["" + name + "|" + name2 + "|" + Statsitems])
     }
 
     //%block="get Stats from stat with name $name from list $list|| at index $index"
@@ -38,13 +42,17 @@ namespace ArrayStats {
     //%stats.shadow="lists_create_with"
     //%group="Change"
     export function change_stats(name: string, list: string, stats: any[]): void {
+        let Statsitems = ""
+        for (let i = 0; i < stats.length; i++) {
+            Statsitems = Statsitems + stats[i] + "|"
+        }
         for (let i = 0; i < StatsArray.length; i++) {
             ArrayItems = StatsArray[i]
             useItems = ArrayItems[0]
             ArrayParts = useItems.split("|")
             ArrayPart = ArrayParts[0]
             if (ArrayParts[1] == name && ArrayParts[0] == list) {
-                StatsArray[i] = ["" + ArrayParts[0] + "|" + stats[0] + "|" + stats[1] + "|" + stats[2]]
+                StatsArray[i] = ["" + list + "|" + name + "|" + Statsitems]
             }
         }
     }
@@ -70,5 +78,35 @@ namespace ArrayStats {
             }
         }
         return undefined
+    }
+    //%block="Create Stat $stats with name $name2 for $name list"
+    //%stats.shadow="lists_create_with"
+    //%group="Create"
+    export function create_stats_get(name: string, stats: any[], name2: string): any {
+        let Statsitems = ""
+        for (let i = 0; i < stats.length; i++) {
+            Statsitems = Statsitems + stats[i] + "|"
+        }
+        StatsArray.push(["" + name + "|" + name2 + "|" + Statsitems])
+        return ["" + name + "|" + name2 + "|" + Statsitems]
+    }
+    //%block="Change Stats with name $name from list $list to $stats"
+    //%stats.shadow="lists_create_with"
+    //%group="Change"
+    export function change_stats_get(name: string, list: string, stats: any[]): any {
+        let Statsitems = ""
+        for (let i = 0; i < stats.length; i++) {
+            Statsitems = Statsitems + stats[i] + "|"
+        }
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[1] == name && ArrayParts[0] == list) {
+                StatsArray[i] = ["" + list + "|" + name + "|" + Statsitems]
+                return ["" + list + "|" + name + "|" + Statsitems]
+            }
+        }
     }
 }
