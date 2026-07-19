@@ -6,7 +6,12 @@ namespace ArrayStats {
     let useItems = ""
     let ArrayItems: any[] = []
     let StatsArray: any[][] = []
-
+    enum NameTypes {
+        //%block="List Stat Length"
+        ListLength,
+        //%block="Stat Length"
+        StatLength,
+    }
 
     
     //%block="Create Stat $stats with name $name2 for $name list"
@@ -116,5 +121,36 @@ namespace ArrayStats {
                 return ["" + list + "|" + name + "|" + Statsitems]
             }
         }
+    }
+    //block="length of stat with name $name for list $list"
+    //group="values"
+    /*
+    export function length_of_stats(list: string,name: string): any {
+        let Length = 0
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[1] == name && ArrayParts[0] == list) {
+                Length++
+            }
+        }
+        return Length
+    */
+    //%block="length of list with name $list"
+    //%group="values"
+    export function length_of_list(list: string): any {
+        let Length = 0
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[0] == list) {
+                Length++
+            }
+        }
+        return Length
     }
 }
