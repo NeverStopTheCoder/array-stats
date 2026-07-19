@@ -6,6 +6,7 @@ namespace ArrayStats {
     let useItems = ""
     let ArrayItems: any[] = []
     let StatsArray: any[][] = []
+    let lastPickedRow: any[] = []
     enum NameTypes {
         //%block="List Stat Length"
         ListLength,
@@ -81,7 +82,7 @@ namespace ArrayStats {
         if (matches.length > 0) {
             let randomIndex = randint(0, matches.length - 1)
             let row: any[] = matches[randomIndex]
-
+            lastPickedRow = row
             if (index != undefined) {
                 let parts = (row[0] as string).split("|")
                 let backup: any[] = row[1] 
@@ -168,5 +169,14 @@ namespace ArrayStats {
             }
         }
         return ArrayParts.length - 3
+    }
+
+    //%block="get stat from last random picked stat at index $index"
+    //%group="Get"
+    export function Get_last_picked(index: number): any {
+        if (lastPickedRow.length == 0) return undefined
+        let parts = (lastPickedRow[0] as string).split("|")
+        let backup: any[] = lastPickedRow[1]
+        return parts[index] == "[object Object]" ? backup[index - 2] : parts[index]
     }
 }
