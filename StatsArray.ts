@@ -67,6 +67,7 @@ namespace ArrayStats {
     }
     //%block="get Random Stat from list with name $name || at index $index"
     //%group="Get"
+    //%draggableParameters="reporter"
     export function Get_random_stats(name: string, index?: number): any {
         let matches: any[] = []
         for (let i = 0; i < StatsArray.length; i++) {
@@ -152,5 +153,20 @@ namespace ArrayStats {
             }
         }
         return Length
+    }
+    //%block="length of stat with name $name for list $list"
+    //%group="values"
+    export function length_of_stats(name: string, list: string): any {
+        let Length = 0
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[1] == name && ArrayParts[0] == list) {
+                return ArrayParts.length - 3
+            }
+        }
+        return ArrayParts.length - 3
     }
 }
