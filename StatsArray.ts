@@ -4,8 +4,8 @@ namespace ArrayStats {
     let ArrayPart = ""
     let ArrayParts: string[] = []
     let useItems = ""
-    let ArrayItems: string[] = []
-    let StatsArray: string[][] = []
+    let ArrayItems: any[] = []
+    let StatsArray: any[][] = []
 
 
     
@@ -17,22 +17,26 @@ namespace ArrayStats {
         for (let i = 0; i < stats.length; i++) {
             Statsitems = Statsitems + stats[i] + "|"         
         }
-        StatsArray.push(["" + name + "|" + name2 + "|" + Statsitems])
+        StatsArray.push(["" + name + "|" + name2 + "|" + Statsitems, stats])
     }
 
     //%block="get Stats from stat with name $name from list $list|| at index $index"
     //%group="Get"
     export function Get_stats(name: string, list: string, index?: number,): any {
         for (let i = 0; i < StatsArray.length; i++) {
-            ArrayItems = StatsArray[i]
-            useItems = ArrayItems[0]
+            let row: any[] = StatsArray[i]
+
+            useItems = row[0]
             ArrayParts = useItems.split("|")
             ArrayPart = ArrayParts[0]
+
             if (ArrayParts[1] == name && ArrayParts[0] == list) {
                 if (index != undefined) {
-                    return ArrayParts[index]
-                }else {
-                return useItems
+                    let backup: any[] = row[1]
+
+                    return ArrayParts[index] == "[object Object]" ? backup[index - 2] : ArrayParts[index]
+                } else {
+                    return useItems
                 }
             }
         }
@@ -59,22 +63,26 @@ namespace ArrayStats {
     //%block="get Random Stat from list with name $name || at index $index"
     //%group="Get"
     export function Get_random_stats(name: string, index?: number): any {
-        let matches: string[] = []
+        let matches: any[] = []
         for (let i = 0; i < StatsArray.length; i++) {
             ArrayItems = StatsArray[i]
             useItems = ArrayItems[0]
             ArrayParts = useItems.split("|")
             if (ArrayParts[0] == name) {
-                matches.push(useItems) 
+                matches.push(StatsArray[i])
             }
         }
         if (matches.length > 0) {
             let randomIndex = randint(0, matches.length - 1)
+            let row: any[] = matches[randomIndex]
+
             if (index != undefined) {
-                let parts = matches[randomIndex].split("|")
-                return parts[index] 
+                let parts = (row[0] as string).split("|")
+                let backup: any[] = row[1] 
+
+                return parts[index] == "[object Object]" ? backup[index - 2] : parts[index]
             } else {
-                return matches[randomIndex]
+                return row[0]
             }
         }
         return undefined
