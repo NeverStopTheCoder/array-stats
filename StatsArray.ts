@@ -179,4 +179,19 @@ namespace ArrayStats {
         let backup: any[] = lastPickedRow[1]
         return parts[index] == "[object Object]" ? backup[index - 2] : parts[index]
     }
+
+    //%block="Amount Of Stats Created"
+    //%group="Get"
+    export function Get_stats_length(): any {
+        return StatsArray.length
+    }
+    //%block="Every Single Stat"
+    //%group="Get"
+    export function Get_stats_array(): any {
+        let Log = ""
+        for (let i = 0; i < StatsArray.length; i++) {
+            Log = Log + StatsArray[i][0]
+        }
+        return Log
+    }
 }
