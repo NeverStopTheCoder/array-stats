@@ -48,10 +48,10 @@ namespace ArrayStats {
         }
         return undefined
     }
-    //%block="Change Stats with name $name from list $list to $stats"
+    //%block="Change Stats with name $name from list $list to $stats with new name $name2"
     //%stats.shadow="lists_create_with"
     //%group="Change"
-    export function change_stats(name: string, list: string, stats: any[]): void {
+    export function change_stats(name: string, list: string, stats: any[], name2: string): void {
         let Statsitems = ""
         for (let i = 0; i < stats.length; i++) {
             Statsitems = Statsitems + stats[i] + "|"
@@ -62,7 +62,7 @@ namespace ArrayStats {
             ArrayParts = useItems.split("|")
             ArrayPart = ArrayParts[0]
             if (ArrayParts[1] == name && ArrayParts[0] == list) {
-                StatsArray[i] = ["" + list + "|" + name + "|" + Statsitems]
+                StatsArray[i] = ["" + list + "|" + name2 + "|" + Statsitems, stats]
             }
         }
     }
@@ -102,8 +102,8 @@ namespace ArrayStats {
         for (let i = 0; i < stats.length; i++) {
             Statsitems = Statsitems + stats[i] + "|"
         }
-        StatsArray.push(["" + name + "|" + name2 + "|" + Statsitems])
-        return ["" + name + "|" + name2 + "|" + Statsitems]
+        StatsArray.push(["" + name + "|" + name2 + "|" + Statsitems,stats])
+        return ["" + name + "|" + name2 + "|" + Statsitems,stats]
     }
     //%block="Change Stats with name $name from list $list to $stats"
     //%stats.shadow="lists_create_with"
