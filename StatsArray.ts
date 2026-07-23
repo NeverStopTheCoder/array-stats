@@ -119,7 +119,7 @@ namespace ArrayStats {
             ArrayParts = useItems.split("|")
             ArrayPart = ArrayParts[0]
             if (ArrayParts[1] == name && ArrayParts[0] == list) {
-                StatsArray[i] = ["" + name + "|" + list + "|" + Statsitems, stats]
+                StatsArray[i] = ["" + list + "|" + name2 + "|" + Statsitems,stats]
                 return ["" + list + "|" + name2 + "|" + Statsitems, stats]
             }
         }
