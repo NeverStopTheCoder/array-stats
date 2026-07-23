@@ -141,7 +141,7 @@ namespace ArrayStats {
         return Length
     */
     //%block="length of list with name $list"
-    //%group="values"
+    //%group="Values"
     export function length_of_list(list: string): any {
         let Length = 0
         for (let i = 0; i < StatsArray.length; i++) {
@@ -156,7 +156,7 @@ namespace ArrayStats {
         return Length
     }
     //%block="length of stat with name $name for list $list"
-    //%group="values"
+    //%group="Values"
     export function length_of_stats(name: string, list: string): any {
         let Length = 0
         for (let i = 0; i < StatsArray.length; i++) {
@@ -181,16 +181,31 @@ namespace ArrayStats {
     }
 
     //%block="Amount Of Stats Created"
-    //%group="Get"
+    //%group="Values"
     export function Get_stats_length(): any {
         return StatsArray.length
     }
     //%block="Every Single Stat"
-    //%group="Get"
+    //%group="Values"
     export function Get_stats_array(): any {
         let Log = ""
         for (let i = 0; i < StatsArray.length; i++) {
             Log = Log + StatsArray[i][0]
+        }
+        return Log
+    }
+    //%block="Every Single Stat in $list Lsit"
+    //%group="Values"
+    export function Get_stats_array_name(list: string): any {
+        let Log = ""
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[0] == list) {
+                Log = Log + ArrayItems[0]
+            }
         }
         return Log
     }
