@@ -105,10 +105,10 @@ namespace ArrayStats {
         StatsArray.push(["" + name + "|" + name2 + "|" + Statsitems,stats])
         return ["" + name + "|" + name2 + "|" + Statsitems,stats]
     }
-    //%block="Change Stats with name $name from list $list to $stats"
+    //%block="Change Stats with name $name from list $list to $stats with new name $name2"
     //%stats.shadow="lists_create_with"
     //%group="Change"
-    export function change_stats_get(name: string, list: string, stats: any[]): any {
+    export function change_stats_get(name: string, list: string, stats: any[], name2: string): any {
         let Statsitems = ""
         for (let i = 0; i < stats.length; i++) {
             Statsitems = Statsitems + stats[i] + "|"
@@ -119,8 +119,8 @@ namespace ArrayStats {
             ArrayParts = useItems.split("|")
             ArrayPart = ArrayParts[0]
             if (ArrayParts[1] == name && ArrayParts[0] == list) {
-                StatsArray[i] = ["" + list + "|" + name + "|" + Statsitems]
-                return ["" + list + "|" + name + "|" + Statsitems]
+                StatsArray[i] = ["" + name + "|" + list + "|" + Statsitems, stats]
+                return ["" + list + "|" + name2 + "|" + Statsitems, stats]
             }
         }
     }
