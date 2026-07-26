@@ -250,4 +250,42 @@ namespace ArrayStats {
         }
         return false
     }
+    //%block="Get Every Stat name from list $list"
+    //%group="Get"
+    export function Get_stats_name(list: string): any {
+        let Log = ""
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[0] == list) {
+                Log = Log + ArrayParts[1] + "|"
+            }
+        }
+        return Log
+    }
+    //%block="Rename List $list to $list2"
+    //%stats.shadow="lists_create_with"
+    //%group="Change"
+    export function change_stats_name(list2: string, list: string): void {
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[0] == list) {
+                let Statsitems = useItems
+                let SplitStatsitems = Statsitems.split("|")
+                SplitStatsitems[0] = list2
+                let JoinStatsitems = SplitStatsitems.join("|")
+                let UsedItems = JoinStatsitems.split("|")
+                let stuff = ""
+                for (let i = 0; i < UsedItems.length; i++) {
+                   stuff = stuff + UsedItems[i] + "|"
+                }
+                StatsArray[i] = [stuff]
+            }
+        }
+    }
 }
