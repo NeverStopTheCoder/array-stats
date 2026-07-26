@@ -194,7 +194,7 @@ namespace ArrayStats {
         }
         return Log
     }
-    //%block="Every Single Stat in $list Lsit"
+    //%block="Every Single Stat in $list List"
     //%group="Values"
     export function Get_stats_array_name(list: string): any {
         let Log = ""
@@ -208,5 +208,46 @@ namespace ArrayStats {
             }
         }
         return Log
+    }
+    //%block="Remove Stat with name $name from list $list"
+    //%group="Remove"
+    export function Remove_stats(name: string, list: string): void {
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[1] == name && ArrayParts[0] == list) {
+                StatsArray.splice(StatsArray.indexOf(ArrayItems),1)
+            }
+        }
+    }
+    //%block="Check if stat with name $name exists"
+    //%group="Check"
+    export function Check_stats(name: string): boolean {
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[1] == name) {
+                return true
+            }
+        }
+        return false
+    }
+    //%block="Check if list with name $list exists"
+    //%group="Check"
+    export function Check_stats_list(list: string): boolean {
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[0] == list) {
+                return true
+            }
+        }
+        return false
     }
 }
