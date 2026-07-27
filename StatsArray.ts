@@ -179,36 +179,6 @@ namespace ArrayStats {
         let backup: any[] = lastPickedRow[1]
         return parts[index] == "[object Object]" ? backup[index - 2] : parts[index]
     }
-
-    //%block="Amount Of Stats Created"
-    //%group="Values"
-    export function Get_stats_length(): any {
-        return StatsArray.length
-    }
-    //%block="Every Single Stat"
-    //%group="Values"
-    export function Get_stats_array(): any {
-        let Log = ""
-        for (let i = 0; i < StatsArray.length; i++) {
-            Log = Log + StatsArray[i][0]
-        }
-        return Log
-    }
-    //%block="Every Single Stat in $list List"
-    //%group="Values"
-    export function Get_stats_array_name(list: string): any {
-        let Log = ""
-        for (let i = 0; i < StatsArray.length; i++) {
-            ArrayItems = StatsArray[i]
-            useItems = ArrayItems[0]
-            ArrayParts = useItems.split("|")
-            ArrayPart = ArrayParts[0]
-            if (ArrayParts[0] == list) {
-                Log = Log + ArrayItems[0]
-            }
-        }
-        return Log
-    }
     //%block="Remove Stat with name $name from list $list"
     //%group="Remove"
     export function Remove_stats(name: string, list: string): void {
@@ -250,9 +220,9 @@ namespace ArrayStats {
         }
         return false
     }
-    //%block="Get Every Stat name from list $list"
+    //%block="Get Every Stat from list $list at index $index"
     //%group="Get"
-    export function Get_stats_name(list: string): any {
+    export function Get_stats_name(list: string, index: number): any {
         let Log = ""
         for (let i = 0; i < StatsArray.length; i++) {
             ArrayItems = StatsArray[i]
@@ -260,15 +230,14 @@ namespace ArrayStats {
             ArrayParts = useItems.split("|")
             ArrayPart = ArrayParts[0]
             if (ArrayParts[0] == list) {
-                Log = Log + ArrayParts[1] + "|"
+                Log = Log + ArrayParts[index] + "|"
             }
         }
         return Log
     }
-    //%block="Rename List $list to $list2"
-    //%stats.shadow="lists_create_with"
-    //%group="Change"
-    export function change_stats_name(list2: string, list: string): void {
+    //%block="Rename List with name $list to $list2"
+    //%group="Rename"
+    export function change_stats_list_name(list2: string, list: string): void {
         for (let i = 0; i < StatsArray.length; i++) {
             ArrayItems = StatsArray[i]
             useItems = ArrayItems[0]
@@ -280,12 +249,63 @@ namespace ArrayStats {
                 SplitStatsitems[0] = list2
                 let JoinStatsitems = SplitStatsitems.join("|")
                 let UsedItems = JoinStatsitems.split("|")
-                let stuff = ""
+                let Items = ""
                 for (let i = 0; i < UsedItems.length; i++) {
-                   stuff = stuff + UsedItems[i] + "|"
+                    Items = Items + UsedItems[i] + "|"
                 }
-                StatsArray[i] = [stuff]
+                StatsArray[i] = [Items]
             }
         }
+    }
+    //%block="Rename Stat with name $name in list $list to new name $name2"
+    //%group="Rename"
+    export function change_stats_name(name: string, list: string, name2: string): void {
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[1] == name && ArrayParts[0] == list) {
+                let Statsitems = useItems
+                let SplitStatsitems = Statsitems.split("|")
+                SplitStatsitems[1] = name2
+                let JoinStatsitems = SplitStatsitems.join("|")
+                let UsedItems = JoinStatsitems.split("|")
+                let Items = ""
+                for (let i = 0; i < UsedItems.length; i++) {
+                    Items = Items + UsedItems[i] + "|"
+                }
+                StatsArray[i] = [Items]
+            }
+        }
+    }
+    //%block="Amount Of Stats Created"
+    //%group="Debugging/Saving"
+    export function Get_stats_length(): any {
+        return StatsArray.length
+    }
+    //%block="Every Single Stat"
+    //%group="Debugging/Saving"
+    export function Get_stats_array(): any {
+        let Log = ""
+        for (let i = 0; i < StatsArray.length; i++) {
+            Log = Log + StatsArray[i][0]
+        }
+        return Log
+    }
+    //%block="Every Single Stat in $list List"
+    //%group="Debugging/Saving"
+    export function Get_stats_array_name(list: string): any {
+        let Log = ""
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[0] == list) {
+                Log = Log + ArrayItems[0]
+            }
+        }
+        return Log
     }
 }
