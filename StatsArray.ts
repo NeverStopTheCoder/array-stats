@@ -308,4 +308,18 @@ namespace ArrayStats {
         }
         return Log
     }
+    //%block="Check if list with name $list Contains Stat with name $name"
+    //%group="Check"
+    export function Check_stats_and_list(list: string, name: string): boolean {
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[0] == list && ArrayParts[1] == name) {
+                return true
+            }
+        }
+        return false
+    }
 }
