@@ -322,17 +322,23 @@ namespace ArrayStats {
         }
         return false
     }
-    //%block="Find Stat in List $list containing $item"
+    //%block="Find Stat in List $list containing $item || at index $index"
     //%group="Find"
-    export function Find_Stat(list: string, item: any): any {
+    export function Find_Stat(list: string, item: any, index?: number): any {
         for (let i = 0; i < StatsArray.length; i++) {
             ArrayItems = StatsArray[i]
             useItems = ArrayItems[0]
             ArrayParts = useItems.split("|")
             ArrayPart = ArrayParts[0]
             for (let i2 = 0; i2 < ArrayParts.length; i2++) {
+            if (index != undefined) {
+            if (ArrayParts[0] == list && ArrayParts[index] == item) {
+                return StatsArray[i]
+            }
+            }else {
             if (ArrayParts[0] == list && ArrayParts[i2] == item) {
                 return StatsArray[i]
+            }
             }
             }
         }
