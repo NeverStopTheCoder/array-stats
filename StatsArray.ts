@@ -344,4 +344,25 @@ namespace ArrayStats {
         }
         return false
     }
+    //% block="get Stats from stat from index $index from list $list|| at index $index2"
+    //% group="Get"
+    export function Get_stats_index(index: number, list: string, index2?: number): any {
+        let foundIndex = 0;
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            if (ArrayParts[0] == list) {
+                if (foundIndex == index) {
+                    if (index2 != undefined) {
+                        return ArrayParts[index2];
+                    } else {
+                        return StatsArray[i];
+                    }
+                }
+                foundIndex++;
+            }
+        }
+        return false;
+    }
 }
