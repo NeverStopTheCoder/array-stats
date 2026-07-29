@@ -365,4 +365,26 @@ namespace ArrayStats {
         }
         return false;
     }
+    //% block="Change Stat with name $name from list $list item at index $index to $stat"
+    //% group="Change"
+    export function change_stats_index(name: string, list: string, index: number, stat: any): void {
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[1] == name && ArrayParts[0] == list) {
+                let Statsitems = useItems
+                let SplitStatsitems = Statsitems.split("|")
+                SplitStatsitems[index] = stat
+                let JoinStatsitems = SplitStatsitems.join("|")
+                let UsedItems = JoinStatsitems.split("|")
+                let Items = ""
+                for (let i = 0; i < UsedItems.length; i++) {
+                    Items = Items + UsedItems[i] + "|"
+                }
+                StatsArray[i] = [Items]
+            }
+        }
+    }
 }
