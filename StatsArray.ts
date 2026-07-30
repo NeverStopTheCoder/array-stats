@@ -387,4 +387,28 @@ namespace ArrayStats {
             }
         }
     }
+    //% block="Add $stat to stat with name $name from list $list"
+    //% group="Add"
+    export function Add_Stat(name: string, list: string, stat: any): void {
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[1] == name && ArrayParts[0] == list) {
+                let Statsitems = useItems
+                let SplitStatsitems = Statsitems.split("|")
+                SplitStatsitems.push(stat)
+                let JoinStatsitems = SplitStatsitems.join("|")
+                let UsedItems = JoinStatsitems.split("|")
+                let Items = ""
+                for (let i = 0; i < UsedItems.length; i++) {
+                    if (i !== UsedItems.length - 2) {
+                    Items = Items + UsedItems[i] + "|"
+                    }
+                }
+                StatsArray[i] = [Items]
+            }
+        }
+    }
 }
