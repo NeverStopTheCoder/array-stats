@@ -308,6 +308,21 @@ namespace ArrayStats {
         }
         return Log
     }
+    //%block="Amount Of Every Single Stat in $list List"
+    //%group="Debugging/Saving"
+    export function Get_stats_array_name_amount(list: string): any {
+        let LogNumber = 0
+        for (let i = 0; i < StatsArray.length; i++) {
+            ArrayItems = StatsArray[i]
+            useItems = ArrayItems[0]
+            ArrayParts = useItems.split("|")
+            ArrayPart = ArrayParts[0]
+            if (ArrayParts[0] == list) {
+                LogNumber++
+            }
+        }
+        return LogNumber
+    }
     //%block="Check if list with name $list Contains Stat with name $name"
     //%group="Check"
     export function Check_stats_and_list(list: string, name: string): boolean {
